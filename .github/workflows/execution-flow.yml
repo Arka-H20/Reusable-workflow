@@ -64,3 +64,5 @@ jobs:
   deploy:
     needs: [build,lint]
     uses: ./.github/workflows/reusable.yml
+    with: 
+      arka-inputs: dist-files

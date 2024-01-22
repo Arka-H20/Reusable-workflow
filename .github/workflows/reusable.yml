@@ -1,8 +1,21 @@
 name: Reusable workflow
-on: workflow_call
+on: 
+    workflow_call:
+        inputs:
+            arka-inputs:
+                description: This is the input field of the Re usable workflow
+                required: false
+                default: dist
+                type: string
 jobs:
     Reuse-job:
         runs-on: ubuntu-latest
         steps:
+        - name: Get Code
+          uses: actions/download-artifact@v4
+          with:
+            name: ${{ inputs.arka-inputs }}
+        - name: List files
+          run: ls
         - name: Demo Deploy
           run: echo "Deploying & uploading"
