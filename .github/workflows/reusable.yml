@@ -7,8 +7,17 @@ on:
                 required: false
                 default: dist
                 type: string
+        outputs:
+            arka-result:
+                description: This is the output of the reusable workflow
+                value: ${{ jobs.Reuse-job.outputs.my-output }}
+        #secrets:
+        #    my-secret:
+        #        required: true
 jobs:
     Reuse-job:
+        outputs:
+            my-output: ${{ steps.set-result.outputs.my-result}}
         runs-on: ubuntu-latest
         steps:
         - name: Get Code
@@ -19,3 +28,6 @@ jobs:
           run: ls
         - name: Demo Deploy
           run: echo "Deploying & uploading"
+        - name: set result output
+          id: set-result
+          run: echo "my-result=success" >> $GITHUB_OUTPUT
