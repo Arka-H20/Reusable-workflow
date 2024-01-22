@@ -62,8 +62,5 @@ jobs:
           name: dist-files
           path: dist
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call usable workflow
-        uses: ./.github/workflows/reusable.yml
+    needs: [build,lint]
+    uses: ./.github/workflows/reusable.yml
